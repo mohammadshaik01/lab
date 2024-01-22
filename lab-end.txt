@@ -1,0 +1,778 @@
+labsheet 1
+EXPERIMENT 1. Creating and pushing changes from local repository to remote repository in GitHub
+Problem statement  Create a repository in your local system and Github. Get inside the directory and create a file. Commit changes and push changes to the remote repository
+SOLUTION :
+
+git init  //initialize the 
+git status
+notepad text1.txt
+git add text1.txt
+git commit -m "my first commit in Demo1"
+git log . To check commit log
+git remote add origin “https://github.com/namratasgit/demorepo.git”
+git push origin master
+
+
+EXPERIMENT 2a. Branching and Merging [continue experiment 1]
+Problem statement  Create and move to a feature branch from the master branch [refer to exp 1], Make necessary changes, commit changes and push changes to remote repository. Switch back to master branch and merge recent commit of feature branch on master branch. 
+SOLUTION :
+
+git branch NewBranch  //creating a new branch
+
+git checkout NewBranch //switched to newbranch
+
+notepad demo2.txt
+
+git add .
+
+git commit -m "added demo.txt, my first commit"
+
+git push origin NewBranch  //push New branch commits to remote repository
+
+git checkout master //switch to master branch
+
+git merge NewBranch //merge changes of feature branch with master branch
+
+git push origin master //push the changes to the master branch
+
+git branch -d NewBranch //delete the feature branch from local repository
+
+git push origin --delete NewBranch //delete the feature branch from remote repository
+
+
+EXPERIMENT 2b. Branching and Merging
+Problem statement  Create an add.py and sub.py file in master branch. Create a feature branch, Switch to it and create a multiply.py and div.py file. Move back to master branch, create a mod.py file and perform a merge. Finally push the updated master branch to remote repository in Github
+Solution :
+//Create a repository in your Github account and local system. Move inside the repo in your local system, open git bash and perform the following actions-
+//Master
+git init
+notepad add.py
+git add .
+git commit –m “Commit on add”
+notepad sub.py
+git add .
+git commit –m “Commit on sub”
+git branch feature
+git checkout feature
+
+//Feature
+notepad multiply.py
+git add .
+git commit –m “Commit on multiply”
+notepad div.py
+git add .
+git commit –m “Commit on div”
+git checkout master
+
+// Master
+notepad mod.py
+git add .
+git commit –m “Commit on mod”
+git merge feature
+git remote add origin “http:…..” // add remote repo http link
+git push origin master
+
+
+
+
+EXPERIMENT 3. Resolving merge conflicts
+a.	Create a new repository in github and add a simple text file with contents-
+Hello!
+I am developer_name
+I am from developer_city
+b.	Get into your local systems and create two separate folders named “Alice” and “Bob” in two separate drives.
+c.	Get inside both folders and open git bash.
+d.	Follow the steps below for each user mentioned-
+i.	Both Alice and Bob clones the remote repository from Github
+ii.	Both get into the cloned repository.
+iii.	Alice creates a feature branch while Bob uses choses to stay in the master branch.
+iv.	Feature  Alice switches to the feature branch, creates a text file , commits the changes and switches back to the master branch
+Master  Bob creates a text file, commits on the changes and performs a push to the remote repository.
+v.	Master   Alice pulls the remote repository, merges the feature branch ‘dev1branch’ to the master branch, gets a conflict and resolves it
+vi.	Master   After resolving conflict, the changed file is committed and push to the remote repository. 
+
+SOLUTION :
+
+Alice 									Bob
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXPERIMENT 4 : Git Rebase
+	Create a repository in your local machine and perform the following steps-
+
+//Master 
+git init
+notepad a.txt
+git add .
+git commit –m “First commit”
+git branch feature
+
+//Feature
+notepad b.txt
+git add .
+git commit –m “Seond commit”
+git checkout master
+
+//Master
+notepad c.txt
+git add .
+git commit –m “Third commit”
+git checkout feature
+//Feature
+git rebase master
+git log 
+git checkout master
+
+//Master
+notepad d.txt
+git add .
+git commit –m “Fourth commit”
+git log	//to check commit history on master
+git checkout feature
+
+//Feature
+notepad e.txt
+git add .
+git commit –m “Fifth commit”
+git log  //to check commit history on feature
+git rebase master
+git log
+
+
+
+EXPERIMENT 5: Git stash
+	Create a new repository in github and add a simple text file
+	Get inside your working directory in local system and perform the following-
+git clone https://github.com/namratasgit/stashrepo.git //cloning a remote repo to local system
+cd stashrepo   // get into the cloned repo
+git init	 
+git branch feature1   //create new branch – feature1
+git checkout feature1	// switch to feature branch
+
+// perform the following actions
+notepad second.txt		
+git add .
+git stash	// stash the second.txt file
+notepad third.txt
+git add .
+git commit –m “F2”  //commit the third.txt file
+git log 
+ls
+git stash apply
+ls
+git stash
+git checkout main  // switch to main branch
+git merge main		// perform merge
+git branch feature2   //create new branch – feature2
+git checkout feature2	// switch to feature branch 
+
+//perform the following actions
+notepad fourth.txt
+git add .
+git stash		// stash the fourth.txt file
+git checkout main		//switch to main branch
+git merge main	// perform merge on main
+git push origin main	//push changes to github repo
+
+
+
+================================================================================================================================================================================================================
+  labsheet 2
+  LABSHEET 2
+DOCKER INSTALLATION AND BASIC DOCKER COMMANDS MANUAL
+1. Run Powershell as admin and check for wsl2-
+	a. type wsl and check if installed.
+	b. if not installed, check the wsl2 installation manual at https://learn.microsoft.com/en-us/windows/wsl/install
+c. type wsl --install and install 
+d. wsl --set-default-version 2
+e. wsl --list --verbose
+	f. to change linux distribution, type wsl --list --online
+	g. type wsl --install -d <Distribution Name> to install multiple distros
+	h. type wsl.exe to check the version after installing
+	i. type wsl.exe --status
+	j. type wsl.exe –l –v to check the wsl mode
+	k. wsl --set-default <distribution_name>
+
+l. wsl.exe -d Ubuntu-22.04 [to launch Ubuntu-22.04]
+
+
+2. Install Docker Desktop from https://docs.docker.com/desktop/install/windows-install/
+3. Create an account in Dockerhub
+Basic Commands-
+i.	docker info
+ii.	docker pull hello-world:latest
+iii.	docker images
+iv.	docker image COMMAND //displays list of options to work with images  
+v.	docker ps
+vi.	docker ps –a
+vii.	docker run hello-world
+viii.	docker inspect <container-id> //to inspect about a container
+ix.	docker run --name hellocontainer hello-world //to rename a container
+x.	docker run –name <container-name> -i –t –d <image:tag> //to run a container in interactive mode
+or
+docker run  - -name <container-name> -itd <image:tag>
+docker run name <container-name> -it –d <image:tag>
+
+where -i to open image in interactive mode and allow us for standard input or interact with the command-line of the container
+    -t  provide an interactive terminal session
+   -d  detach( run containers in background and print an ID) 
+xi.	docker exec -it <container-name> <image> // to open the terminal
+xii.	exit() // to exit from the container terminal
+xiii.	docker run - -name <container-name> -i –t <image:tag> // to directly open the interactive terminal session without exec command.
+xiv.	docker restart python-c3 //to restart an existing container
+xv.	docker rm <container-name>
+xvi.	docker rmi <image-id>
+xvii.	docker container prune //delete all stopped containers from engine
+xviii.	EXPOSING AND PUBLISHING PORT
+docker run  - -name nginx-c1 –d –p 8085:80 nginx //binding host machine port to nginx server port(nginx runs in port 80)
+The same port can be used by apache web server if you run different container for a different server 
+docker run  - -name apache-c1 –d –p 8000:80 httpd
+xix.	docker run -d ubuntu sleep 100 // to keep a container for 100 secs
+docker exec <container-id>  cat /etc/release  //to run a command in a running container
+
+xx.	docker stop <container-name> //to stop a running container
+xxi.	docker start <container-name> //to start the same container and start working again
+xxii.	 PUSHING IMAGE TO DOCKERHUB
+docker tag <image-id>  username/repository
+docker login //press enter and provide both username and password of your dockerhub account.
+docker push username/repository
+xxiii.	USING ENVIRONMENT VARIABLE AND ACCESS MYSQL SHELL
+docker pull mysql:latest
+docker run - -name mysql-c1 -e MYSQL_ROOT_PASSWORD=<your-password> -d mysql:latest
+docker exec -it mysql-c1 mysql -u root -p
+ To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+==================================================================================================================================================================================================================
+labsheet 3
+
+LABSHEET 3
+CREATING AND PLAYING WITH IMAGES USING DOCKERFILE
+1. Write a simple prompt application that takes the name as user input and leaves a welcome message with the name. Also create a dockerfile to tun the same in nginx
+Solution
+a. Create an HTML file with the following content
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome Page</title>
+</head>
+<body>
+    <h1>Welcome Page</h1>
+    <form>
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="button" onclick="displayWelcome()">Submit</button>
+    </form>
+    <p id="welcomeMessage"></p>
+    <script>
+        function displayWelcome() {
+            var name = document.getElementById("name").value;
+            var welcomeMessage = document.getElementById("welcomeMessage");
+            welcomeMessage.innerHTML = "Welcome, " + name + "!";
+        }
+    </script>
+</body>
+</html>
+
+
+b. Create a dockerfile to serve this html file using NGINX server
+# Dockerfile
+# Use the official NGINX image as a parent image
+FROM nginx
+# Copy the HTML file into the container
+COPY index.html /usr/share/nginx/html/index.html
+# Expose port 80
+EXPOSE 80
+c. Build the docker image for your HTML application
+docker build -t namratasdocker/html-app .
+d.	Run a docker container for the image
+docker run -d -p 8086:80 namratasdocker/html-app 
+e.	Push image to docker hub repository
+docker push namratasdocker/html-app
+
+2.  Create a dockerfile that installs Ubuntu and displays a message immediately it runs.
+Solution
+FROM ubuntu:jammy-20230916
+
+LABEL maintainer="namrata <dasnamrata795@gmail.com>"
+
+LABEL description="This example Dockerfile installs ubuntu and displays a message."
+
+RUN apt-get update
+
+CMD ["echo", "Hello World...! from my first docker image"]
+
+Execute the following commands in your docker cli
+docker build –t myubuntuapp .  // to build the Image
+docker run - -name myubuntu myapp2  //to run a container for the image.
+docker tag   myubuntuapp namratasdocker/repository  // // tag your docker image with your dockerhub repository name. This means associating your image with your docker hub repo and when you push it to the docker hub, it will be stored in that repo under the name ‘namratasdocker/myapp’
+docker login //authenticate using credentials
+docker push namratasdocker/repository //push image to dockerhub
+
+3. Create a simple dockerfile that uses Ubuntu as the base image and installs apache v2
+Solution
+FROM ubuntu
+RUN apt-get update
+RUN apt-get -y install apache2
+ADD . /var/www/html
+#CMD apachectl -D FOREGROUND
+ENTRYPOINT apachectl -D FOREGROUND //to start apache v2, apachectl is a frontend HTTP server
+ENV name DevOps
+
+//creating the image, running container and pushing it to dockerhub
+docker build -t mydockerfile:latest .
+docker run - -name container-c1 -d -p 8086:80 mydockerfile
+docker tag mydockerfile namratasdocker/mydockerfile
+docker login
+docker push namratasdocker/mydockerfile:latest
+		
+4.  Create a Dockerfile for an image that executes "script.sh" script, and displays a  "Hello World...! from my first docker image" message in the container's standard output.
+
+Solution
+a.	Create a script.sh file 
+#! /bin/bash	// This is called a shebang line. It specifies the interpreter to be used for the script, which is "/bin/bash" in this case
+echo "Hello World...! from my first docker image" 	// the actual command that will be executed when the "script.sh" script is run. It prints the "Hello World...! from my first docker image" message to the standard output of the container.
+
+
+
+b.	Create a Dockerfile to build the above application
+#The base image you want to use and customize
+FROM Ubuntu	 // This line specifies the base image for your Docker image. In this case, you are using the "ubuntu" base image, which provides the Ubuntu Linux operating system.
+
+#Set the working directory inside container
+WORKDIR /app     // sets the working directory inside the container to "/app." All subsequent   commands will be executed in this directory.
+
+#Copy a script file to the container
+COPY script.sh .	// copies the "script.sh" file from the host system into the "/app" directory of the container. The "." refers to the current directory inside the container.
+
+#Make the script executable
+RUN chmod +x script.sh    // makes the "script.sh" file executable within the container by using the "chmod" command.
+
+CMD [ "./script.sh"]	// specifies the command that should be executed when the container starts. It tells Docker to run the "script.sh" script.
+
+
+5. Create a static index.html file in a directory of your choice, to display any message of your choice
+a.	Create a dockerfile in the same directory 
+i.	Use nginx as the base image
+ii.	Copy the index.html file inside the container image
+b.	Create the image and push it to docker hub
+c.	Pull it into your docker server, create and run a container
+
+6. Create a Dockerfile to build an image for a Python application that adds two numbers and displays the result
+
+
+================================================================================================================================================================================================================
+  labsheet 4
+  1.	Create a simple freestyle project that triggers a job after every 1 minute.
+Solution
+Log into your Jenkins server-
+I.	Go to new item, give a name to your project, select freestyle project and click OK
+II.	Give a description to your project(optional)
+III.	Under ‘Build Triggers’, select ‘build periodically’ and type * * * * * in the shell
+IV.	Under ‘Build Step’, select ‘Execute windows batch command’ and type the following commands-
+echo “my first Jenkins project: %date% : %time%”
+V.	Save and apply
+VI.	Build.
+VII.	Disable the project to stop the build triggers.
+
+
+2.	Create a Jenkins freestyle project that integrates Jenkins with Git to execute a simple java program 
+Solution
+I.	Write a simple java program and save it as ‘myprog.java’(say) and save it in any directory of your choice. 
+II.	Write the java code in step 2.
+public class Switch {
+    public static void main(String args[]){
+
+        int day = 10;
+
+        switch(day){
+
+            case 1:{
+                        System.out.println("Monday");
+                        break;
+                    }
+            case 2:{
+                        System.out.println("Tuesday");
+                        break;
+                    }
+            case 3:{
+                        System.out.println("Wednesday");
+                        break;
+                    }
+            case 4:{
+                        System.out.println("Thursday");
+                        break;
+                    }
+            case 5:{
+                        System.out.println("Friday");
+                        break;
+                    }
+            case 6:{
+                        System.out.println("Saturday");
+                        break;
+                    }
+            case 7:{
+                        System.out.println("Sunday");
+                        break;
+                    }
+            default:{
+                        System.out.println("Please enter numbers in the range 1:7");
+                        break;
+                    }
+
+        }
+    }
+}
+III.	Create a github repository for your project.
+IV.	Open gitbash from the local directory consisting of your ‘myprog.java’ file. [Say the directory in your local system is ‘C:\Users\user\Desktop\Namrata_Das_PU\Fall_AY_2023-24\Subject_Handled\DevOps\java\myprog.java’].
+V.	Push the project to your repository [mention all steps executed in git bash to push the project to the github repository]
+VI.	In your Jenkins server-
+a)	Go to new item, give a name to your project, select freestyle project and click OK.
+b)	Give a description to your project(optional)
+c)	Choose the SCM of your choice, say Git.
+d)	Provide the repository URL , credentials(optional, if public) and Branches to build ‘/master’ (if git branch is master) or ‘/main’ (if git branch is main)
+e)	Under ‘Build Step’, select ‘Execute windows batch command’ and type the following commands-
+javac myprog.java
+java myprog
+f)	Save and apply
+g)	Build.
+
+3.	Create a simple Jenkins scripted pipeline.
+Solution
+In your Jenkins server-
+I.	Go to new item, give a name to your project, select pipeline and click OK
+II.	Give a description to your project(optional)
+III.	Go to pipeline, select the ‘Pipeline Script’ option and copy paste the sample pipeline in the command-line shell as given-
+node{
+stage('Compile'){
+		echo "Compiled Successfully!!";
+	}
+
+stage('JUnit') {
+		echo "JUnit Passed Succesfully!";
+}
+
+stage('Quality-Gate') {
+		echo "SonarQube Quality Gate passed succesfully!!";
+						/sh exit ("1");/
+}
+
+stage('Deploy') {
+		echo "Pass!";
+}
+}
+
+IV.	Save and apply
+V.	Build.
+
+4.	Create a simple Jenkins declarative pipeline.
+Solution
+
+In your Jenkins server-
+I.	Go to new item, give a name to your project, select pipeline and click OK
+II.	Give a description to your project(optional)
+III.	Go to pipeline, select the ‘Pipeline Script’ option and copy paste the sample pipeline in the command-line shell as given-
+pipeline {
+	agent any
+	stages {
+		stage('Git-Checkout'){
+			steps {
+				echo "Checking out from Git Repo";
+			}
+		}
+
+		stage('Build') {
+			steps {
+				echo "Building the checkedout project!";
+			}
+		}
+
+		stage('Unit-Test') {
+			steps {
+				echo "Running JUnit tests";
+			}
+		}
+		stage('Quality-Gate') {
+			steps {
+				echo "Verifying Quality Gates";
+			}
+		}
+
+		stage('Deploy') {
+			steps {
+				echo "Deploying to stage environments for more tests";
+			}
+		}
+	}
+	
+		post {
+			always {
+					echo 'This will always run'
+				}
+			success {
+					echo 'This will run only if successful'
+				}
+			failure {
+					echo 'This will run only if failed'
+				}
+			unstable {
+					echo 'This will run only if the run was marked as unstable'
+				}
+	    		changed {
+					echo 'This will run only if the state of the pipeline has changed'
+					echo 'For example, if the pipeline was previously failing but is now successful'
+				}
+   		 }
+}
+
+
+iv.	Save and apply
+v.	Build.
+
+5.	
+===========================================================================================================================================================================================================
+labsheet 5
+Git-Nginx-Jenkins Pipeline
+
+To create a Jenkins pipeline that integrates with Git and deploys your HTML project to an Nginx server on Windows 10, you can follow these steps:
+1.	Write an html project ‘index.html’ and save it in any directory of your choice. Say the directory in your local system is ‘C:\Users\user\Desktop\Namrata_Das_PU\Fall_AY_2023-24\Subject_Handled\DevOps\pipeline’.
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas Example</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Canvas Example</h1>
+        <p>Draw on the canvas by clicking and dragging the mouse</p>
+    </header>
+    <article>
+        <h2>Canvas</h2>
+        <canvas id="myCanvas" width="400" height="400" 
+        onmousedown="startDrawing(event)" onmousemove="drawLine(event)" 
+        onmouseup="stopDrawing(event)"></canvas>
+    </article>
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var isDrawing = false;
+    function startDrawing(event) {
+        isDrawing = true;
+        var x = event.clientX - canvas.offsetLeft;
+        var y = event.clientY - canvas.offsetTop;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+    function drawLine(event) {
+        if (isDrawing) {
+        var x = event.clientX - canvas.offsetLeft;
+        var y = event.clientY - canvas.offsetTop;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+    }
+    function stopDrawing(event) {
+        isDrawing = false;
+    }
+</script>
+</body>
+
+
+2.	Download and install nginx server in your system and make all necessary configurations.
+3.	Create a folder ‘htmldocs’ in your nginx filesystem. This will serve as the root directory for your nginx html project . Say the path to the root is ‘C:\Users\user\Desktop\Namrata_Das_PU\Fall_AY_2023-24\DevOps\installers\nginx-1.24.0\htmldocs’
+4.	Create a jenkinsfile named ‘Jenkinsfile’ in the same project directory. 
+
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO_URL = 'https://github.com/namratasgit/pipeline1.git'
+        NGINX_PATH = 'C:\\Users\\user\\Desktop\\Namrata_Das_PU\\Fall_AY_2023-24\\DevOps\\installers\\nginx-1.24.0\\htmldocs'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Use the checkout step to clone the Git repository
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: GIT_REPO_URL]]])
+                }
+            }
+        }
+
+        stage('Deploy to Nginx') {
+            steps {
+                script {
+                    // Using the Jenkins workspace variable to reference files
+                    bat 'xcopy /y "C:\\Users\\user\\Desktop\\Namrata_Das_PU\\Fall_AY_2023-24\\Subject_Handled\\DevOps\\pipeline\\index.html" "%NGINX_PATH%"'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded! You can add additional steps here.'
+        }
+        failure {
+            echo 'Pipeline failed! You may want to take some actions.'
+        }
+    }
+}
+
+The Jenkinsfile consist of two stages-
+a.	Checking out from scm
+b.	Deploying the project in your nginx server
+
+5.	Create a github repository and push the project to your scm.
+6.	In your Jenkins server-
+a.	 create a new pipeline
+b.	Under Pipeline, select Pipeline Script from SCM.
+c.	Choose the SCM of your choice, say Git.
+d.	Provide the repository URL and credentials(optional, if public).
+e.	Set Branches to build to ‘*/master’
+f.	Select script path as Jenkinsfile.
+g.	Save and apply
+h.	Build.
+===============================================================================================================================================================================================================
+  labsheet 6
+  Integrating Docker and Git with Jenkins
+
+To create a Jenkins freestyle project that integrates with Docker and Git and deploys your HTML project to an Nginx server on your operating system, you can follow these steps:
+1.	Write an html program for moving a triangle using u r keys ‘main.html’ and save it in a new folder in your local system
+<!DOCTYPE html>
+<head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    #triangle {
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 87px solid red; /* You can change the color and dimensions as needed */
+      position: absolute;
+    }
+  </style>
+  <title>Triangle Movement</title>
+</head>
+<body>
+  <div id="triangle"></div>
+  <script>
+    // JavaScript for moving the triangle
+    const triangle = document.getElementById('triangle');
+    let posX = 0;
+    let posY = 0;
+
+    function moveTriangle() {
+      triangle.style.left = posX + 'px';
+      triangle.style.top = posY + 'px';
+    }
+
+    document.addEventListener('keydown', (event) => {
+      const step = 10;
+
+      switch (event.key) {
+        case 'ArrowUp':
+          posY -= step;
+          break;
+        case 'ArrowDown':
+          posY += step;
+          break;
+        case 'ArrowLeft':
+          posX -= step;
+          break;
+        case 'ArrowRight':
+          posX += step;
+          break;
+      }
+
+      moveTriangle();
+    });
+
+    moveTriangle(); // Initial positioning
+  </script>
+</body>
+</html>
+
+2.	Create a Docker file in your same folder using visual studios and save it with the name Dockerfile with all files extension(Note: Don’t save it with the extension of dockerfile since it might create problem during creating a docker image )
+             
+       FROM nginx
+       COPY main.html /usr/share/nginx/html/main.html
+       EXPOSE 80
+
+3.	Push your code into GitHub repository which will act as SCM in Jenkins server
+
+4.	Download and install nginx server in your system and make all necessary configurations. 
+ 
+5.	Create a folder ‘htmldocs’ in your nginx filesystem. This will serve as the root directory for your nginx html project . Say the path to the root is ‘C:\Users\user\Desktop\.....\nginx-1.24.0\htmldocs’
+
+6.	In your Jenkins server:
+              
+             a. Create a freestyle project, give name to it and click ok
+             b. You can assign description (Optional)
+             c. In SCM, provide your GitHub Repository URL and click on add repository     (Note: If your repository is private then provide your GitHub credentials under it)
+             d. Go to Build steps, choose Execute windows batch command 
+               There it acts like your command prompt so it will help you in connecting with docker
+             e.  Type these docker commands inside execute windows batch command
+                  REM Docker build command
+      docker build -t triangle-movement .
+ 
+      REM Docker run command
+                  docker run -d -p 2003:80 USERNAME/triangle-movement
+ 
+      REM Docker login (replace USERNAME and PASSWORD with your Docker     Hub credentials)
+                  docker login -u USERNAME -p PASSWORD
+ 
+                  REM Push the Docker image to Docker Hub
+                  docker push USERNAME/triangle-movement
+                  (Note: REM acts like a comment in cmd)
+              f.  Click on apply and build it.
+
+7.	Once the freestyle project gets build u can open in your docker desktop In your local system to see your container running.
+
+8.	There you can click on the port number to deploy your project in the nginx server.
+
+9.	You can verify by opening Docker Hub and check for the repository which y=u created.
+
+10.	 If you want to pull the image again and want to deploy in nginx server then   you can just go to the created freestyle project there you can click configure,
+             there you can change the commands under execute windows batch
+             command:
+             
+              REM Docker pull command from the repository
+              docker pull USERNAME/triangle-movement:latest
+ 
+              REM Docker run command
+              docker run -d -p 2003:80 USERNAME/triangle-movement
+ 
+              REM Docker login (replace USERNAME and PASSWORD with your DockerHub
+              credentials)
+              docker login -u USERNAME -p PASSWORD
